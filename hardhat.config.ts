@@ -20,6 +20,11 @@ const infuraApiKey: string | undefined = process.env.INFURA_API_KEY;
 if (!infuraApiKey) {
   throw new Error("Please set your INFURA_API_KEY in a .env file");
 }
+// Added for forking mainet with alchemy
+const alchemyApiKey: string | undefined = process.env.ALCHEMY_API_KEY;
+if (!infuraApiKey) {
+  throw new Error("Please set your ALCHEMY_API_KEY in a .env file");
+}
 
 const chainIds = {
   "arbitrum-mainnet": 42161,
@@ -78,6 +83,9 @@ const config: HardhatUserConfig = {
   },
   networks: {
     hardhat: {
+      forking: {
+        url: "https://eth-mainet.alchemyapi.io/v2/"+alchemyApiKey,
+      },
       accounts: {
         mnemonic,
       },
